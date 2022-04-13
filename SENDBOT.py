@@ -28,6 +28,9 @@ path_data = os.path.join(os.path.expanduser("~"), 'Desktop')
 bot = telepot.Bot('5121800363:AAFW06cDWT4-Ae9U_L__geQ1wLEPESlILxo')
 dataPath = os.path.join(path_data, "chatid.json")
 
+TesSend = "-627525390"
+TestBotGroup = "-771771446"
+
 def saveChatId(id=None,title=None):
     if os.path.isfile(dataPath):
         keyfile = open(dataPath,encoding="UTF-8")
@@ -47,16 +50,22 @@ def handle(msg):
     pprint(msg)
     id = msg['chat']['id']
     title = msg['chat']['title']
+    message_id = msg['message_id']
+    pprint(id)
+    pprint(title)
+    pprint(message_id)
     if id not in chatIds:
         chatIds = saveChatId(id,title)
+    bot.forwardMessage(TestBotGroup, TesSend, message_id)
+    bot.sendMediaGroup(chat_id, media)
 
 
-saveChatId("1qaz","2wsx")
-saveChatId("2wsx","2wsx")
+# saveChatId("1qaz","2wsx")
+# saveChatId("2wsx","2wsx")
 chatIds = saveChatId()
-print(chatIds)
-print("2wsx" in chatIds)
-print("3edc" in chatIds)
+# print(chatIds)
+# print("2wsx" in chatIds)
+# print("3edc" in chatIds)
 
 """if os.path.isfile(dataPath):
     keyfile = open(dataPath,encoding="UTF-8")
