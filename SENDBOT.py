@@ -66,9 +66,9 @@ def handle(msg):
     if str(chatId) not in chatIds:
         chatIds = saveChatId(BD.from_path,chatId,chatTitle)
     """轉傳"""
-    # bot.forwardMessage(TestBotGroup, TesSend, message_id)
+    # bot.forwardMessage(BD.targetChatId, chatId, message_id)
     """Media Group"""
-    # bot.sendMediaGroup(TestBotGroup, media=[{'media':"AgACAgUAAxkBAAOWYlZ-rQuHFx8KYAQ0QHSJWYZyWTcAAgKsMRuNf9BXjlwyHcayCC4BAAMCAANzAAMjBA",'type':'photo'}])
+    # bot.sendMediaGroup(BD.targetChatId, media=[{'media':"AgACAgUAAxkBAAOWYlZ-rQuHFx8KYAQ0QHSJWYZyWTcAAgKsMRuNf9BXjlwyHcayCC4BAAMCAANzAAMjBA",'type':'photo'}])
 
     if 'media_group_id' in msg:
         mediaGroupId = msg['media_group_id']
