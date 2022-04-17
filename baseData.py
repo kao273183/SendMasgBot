@@ -1,6 +1,6 @@
 import telepot
 import os
-
+ 
 encoding = "UTF-8"
 
 bot = telepot.Bot('5121800363:AAFW06cDWT4-Ae9U_L__geQ1wLEPESlILxo')
