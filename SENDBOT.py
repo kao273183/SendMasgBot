@@ -6,7 +6,7 @@ import time
 from telepot.loop import MessageLoop
 import telegram
 
-mediaGroup = []
+mediaGroup = {}
 
 """save Caht ID"""
 def saveChatId(dataPath,chatId=None,chatTitle=None):
@@ -25,6 +25,10 @@ def saveChatId(dataPath,chatId=None,chatTitle=None):
 
 """組group暫存"""
 def getGroup(mediaGroupId):
+    if str(mediaGroupId) not in mediaGroup:
+        mediaGroup.update({mediaGroupId:{'media':[],'timestamp':time.mktime(time.localtime())}})
+    return mediaGroup[str(mediaGroupId)]
+    """
     for jsonObj in mediaGroup:
         if str(mediaGroupId) in jsonObj:
             return jsonObj
@@ -32,6 +36,7 @@ def getGroup(mediaGroupId):
     for jsonObj in mediaGroup:
         if str(mediaGroupId) in jsonObj:
             return jsonObj
+    """
 
 """組media"""
 def genMedia(msg):
@@ -90,8 +95,14 @@ print("I'm listening...")
 
 while 1:
     now = time.mktime(time.localtime())
+    for key in list(mediaGroup.keys()):
+        if now - mediaGroup[key]['timestamp'] >= 2:
+            BD.bot.sendMediaGroup(BD.targetChatId, media=mediaGroup[key]['media'])
+            del mediaGroup[key]
+    """
     for gp in mediaGroup:
         if now - gp['timestamp'] >= 2:
             BD.bot.sendMediaGroup(BD.targetChatId, media=gp['media'])
             mediaGroup.remove(gp)
+    """
     time.sleep(1)
